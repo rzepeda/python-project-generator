@@ -1,0 +1,47 @@
+{
+  "project_type": "process-centric",
+  "description": "Structure for libraries and tools focused on data transformation and processing workflows",
+  "core_structure": {
+    "processors": {
+      "description": "Individual processing operations (single responsibility)",
+      "purpose": "Single transformation steps",
+      "examples": ["validator.py", "transformer.py", "filter.py"]
+    },
+    "pipelines": {
+      "description": "Workflow orchestration",
+      "purpose": "Chain processors and manage flow",
+      "examples": ["standard_pipeline.py", "batch_pipeline.py"]
+    },
+    "strategies": {
+      "description": "Swappable algorithm implementations",
+      "purpose": "Alternative algorithms for same task",
+      "examples": ["sorting/quick_sort.py", "compression/gzip.py"]
+    },
+    "handlers": {
+      "description": "Cross-cutting concerns (errors, logging, retries)",
+      "purpose": "Handle non-processing concerns",
+      "examples": ["error_handler.py", "retry_handler.py", "logging_handler.py"]
+    },
+    "interfaces": {
+      "description": "Base contracts and protocols",
+      "purpose": "Define component APIs",
+      "examples": ["processor.py", "strategy.py", "pipeline.py"]
+    }
+  },
+  "utils_structure": {
+    "config.py": "Pydantic Settings / Environment loader"
+  },
+  "test_structure": {
+    "unit": {
+      "processors": "Test individual operations (isolated)",
+      "strategies": "Test algorithm correctness",
+      "pipelines": "Test workflow orchestration (mock processors)"
+    },
+    "integration": "End-to-end workflow tests",
+    "performance": "Benchmarks and performance tests",
+    "cli": "CLI interface tests",
+    "gui": "GUI interface tests"
+  },
+  "requires_alembic": false,
+  "requires_database": false
+}

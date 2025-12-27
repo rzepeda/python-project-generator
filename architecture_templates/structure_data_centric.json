@@ -1,0 +1,42 @@
+{
+  "project_type": "data-centric",
+  "description": "Structure for business applications focused on entities, domain models, and persistence",
+  "core_structure": {
+    "entities": {
+      "description": "Pure business objects (framework-independent)",
+      "purpose": "Business rules and validations",
+      "examples": ["customer.py", "order.py", "product.py"]
+    },
+    "services": {
+      "description": "Business workflows and use cases",
+      "purpose": "Orchestrate entities and repositories",
+      "examples": ["customer_service.py", "order_service.py"]
+    },
+    "repositories": {
+      "description": "Data access interfaces",
+      "purpose": "Entity ↔ Model conversion and queries",
+      "examples": ["customer_repository.py", "order_repository.py"]
+    },
+    "models": {
+      "description": "ORM models (SQLAlchemy only)",
+      "purpose": "Database table structure and relationships",
+      "examples": ["customer_model.py", "order_model.py"]
+    }
+  },
+  "utils_structure": {
+    "config.py": "Pydantic Settings / Environment loader",
+    "database.py": "Database session management"
+  },
+  "test_structure": {
+    "unit": {
+      "entities": "Test business rules (no DB)",
+      "services": "Test workflows (mock repositories)",
+      "repositories": "Test data access (test DB)"
+    },
+    "integration": "Full workflow tests",
+    "cli": "CLI interface tests",
+    "gui": "GUI interface tests"
+  },
+  "requires_alembic": true,
+  "requires_database": true
+}

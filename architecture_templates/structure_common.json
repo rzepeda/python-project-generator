@@ -1,0 +1,141 @@
+{
+  "description": "Common project structure for all Python projects (agent-focused development)",
+  "structure": {
+    "agent_tools": {
+      "description": "Agent development tooling (IMMUTABLE)",
+      "folders": {
+        "prompts": {
+          "files": {
+            "system_architect.md": "# System prompt for Architecture tasks\n"
+          }
+        },
+        "templates": {
+          "description": "Templates for agent to generate documents",
+          "files": {}
+        }
+      },
+      "files": {
+        "__init__.py": "",
+        "definitions.py": "# Tool schemas for the Agent\n",
+        "handlers.py": "# Python functions the Agent calls\n",
+        "runner.py": "# Script to launch the Agent loop\n"
+      }
+    },
+    "resources": {
+      "description": "Agent context and templates",
+      "folders": {
+        "templates": {
+          "files": {
+            "test_case.j2": "# Jinja2 template for generating tests\n"
+          }
+        }
+      }
+    },
+    "docs": {
+      "description": "Knowledge base for the agent",
+      "folders": {
+        "epics": {
+          "description": "High-level business requirements",
+          "files": {
+            "README.md": "# Epics\nHigh-level business requirements go here.\n"
+          }
+        },
+        "stories": {
+          "description": "Specific, implementable tasks",
+          "files": {
+            "README.md": "# User Stories\nSpecific, implementable tasks go here.\n"
+          }
+        },
+        "architecture": {
+          "description": "System design and decisions",
+          "folders": {
+            "decisions": {
+              "files": {
+                "README.md": "# Architecture Decision Records (ADRs)\nDocument key architectural decisions here.\n"
+              }
+            },
+            "diagrams": {
+              "files": {
+                "README.md": "# Architecture Diagrams\nC4 diagrams, sequence diagrams, etc. go here.\n"
+              }
+            }
+          }
+        },
+        "standards": {
+          "description": "Coding style and technical restrictions",
+          "files": {
+            "style_and_restrictions.md": "# Project Coding Standards & Technical Restrictions\n\n## 1. Code Style\n- Python: PEP8 compliant\n- Formatter: Black\n\n## 2. Restrictions\n- No circular imports\n- No shell commands in Core\n"
+          }
+        },
+        "reference": {
+          "description": "API documentation and guides",
+          "files": {
+            "README.md": "# Reference Documentation\nAPI documentation, guides, and reference material go here.\n"
+          }
+        }
+      }
+    },
+    "tests": {
+      "description": "Test structure (core tests defined per project type)",
+      "common_folders": {
+        "mocks": {
+          "description": "Shared mock objects",
+          "files": {
+            "__init__.py": "",
+            "README.md": "# Shared Mocks\nShared mock objects for tests\n"
+          }
+        },
+        "dependency_graph": {
+          "description": "Impact analysis - JSON maps linking source files to tests (CRITICAL for agent)",
+          "files": {
+            "README.md": "# Dependency Graph\nJSON maps linking source files to tests for the Agent\n\n## Purpose\nThe agent uses these mappings to determine which tests to run when source files change.\n\n## Structure\n```\ndependency_graph/\n└── {package_name}/\n    ├── core/\n    │   └── entities/\n    │       └── customer.json    # Maps customer.py -> its tests\n    └── cli/\n        └── commands.json        # Maps CLI commands -> their tests\n```\n\n## Example File Content\n```json\n{\n  \"source_file\": \"src/{package}/core/entities/customer.py\",\n  \"tests\": [\n    \"tests/unit/entities/test_customer.py\",\n    \"tests/integration/test_customer_workflows.py\"\n  ],\n  \"dependencies\": [\n    \"src/{package}/core/models/customer_model.py\"\n  ]\n}\n```\n"
+          }
+        },
+        "cli": {
+          "description": "CLI interface tests",
+          "files": {
+            "__init__.py": ""
+          }
+        },
+        "gui": {
+          "description": "GUI interface tests",
+          "files": {
+            "__init__.py": ""
+          }
+        }
+      },
+      "base_files": {
+        "__init__.py": "",
+        "conftest.py": "# Global Pytest fixtures\n"
+      }
+    },
+    "src_common": {
+      "description": "Common source code structure (adapters and utils)",
+      "folders": {
+        "cli": {
+          "description": "Terminal interface (adapter layer)",
+          "files": {
+            "__init__.py": "",
+            "main.py": "# CLI Entry point (Typer/Click)\n"
+          }
+        },
+        "gui": {
+          "description": "Graphical interface (adapter layer)",
+          "files": {
+            "__init__.py": "",
+            "app.py": "# GUI Entry point (PyQt/Tkinter)\n"
+          }
+        }
+      }
+    },
+    "workspace": {
+      "description": "Agent sandbox (ignored by git)",
+      "files": {}
+    }
+  },
+  "root_files": {
+    ".env.example": "DATABASE_URL=sqlite:///./dev.db\nDEBUG=True\n",
+    ".env": "DATABASE_URL=sqlite:///./dev.db\nDEBUG=True\n"
+  },
+  "gitignore": "# --- Python Core ---\n__pycache__/\n*.py[cod]\n*.so\n.pytest_cache/\n.coverage\nhtmlcov/\ndist/\nbuild/\n*.egg-info/\n\n# --- Environments ---\n.env\n.venv/\nenv/\nvenv/\nENV/\n\n# --- Database ---\n*.db\n*.sqlite3\n\n# --- IDEs ---\n.vscode/\n.idea/\n*.swp\n*.ds_store\n\n# --- Agent Sandbox ---\nworkspace/\nlogs/\n*.log\n"
+}
